@@ -1,0 +1,26 @@
+# Use this line to remove tabs at the beginning of new lines
+sed -i -e 's/[ \t]*//' ~/Desktop/texts_tidying/*.txt
+
+# Use this line to remove URLs
+sed -i -e 's!http\(s\)\{0,1\}://[^[:space:]]*!!g' ~/Desktop/texts_tidying/*.txt
+
+# This code removes duplicate text while retaining the first iteration
+# This only works for exact matches on their own lines
+for i in ~/Desktop/texts_tidying/*.txt; do
+    awk '!visited[$0]++' $i > $i.out
+done
+
+# Use this line to put one space after periods
+sed -i -e -E "s/\\.(\S)/\\. \1/g" ~/Desktop/texts_tidying/*.txt
+
+# This code removes *all* white spaces in a file
+# Probably don't need to use this
+sed -i -e 's/[[:blank:]]//g' ~/Desktop/texts_tidying/*.txt | cat -n
+
+# Potentially removes unwanted characters
+# Need to double check this one
+sed -i -e 's/[;,()'\'']/ /g;s/  */ /g' ~/Desktop/texts_tidying/*.txt
+
+
+
+# Still need to find functions for removing emojis, removing html
