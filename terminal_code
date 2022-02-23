@@ -22,6 +22,13 @@ for i in ~/Desktop/texts_tidying/*.out; do
    mv -- "$i" "${i%.out}"
 done
 
+# Adds a prefix to all files in folder
+for f in * ; do 
+mv -- "$f" "pv_$f" ; 
+done
+
+
+
 # This code removes *all* white spaces in a file
 # Probably don't need to use this
 sed -i -e 's/[[:blank:]]//g' ~/Desktop/texts_tidying/*.txt | cat -n
