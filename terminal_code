@@ -2,10 +2,14 @@
 sed -i -e 's/[ \t]*//' ~/Desktop/texts_tidying/*.txt
 
 # Use this line to remove URLs
-sed -i -e 's!http\(s\)\{0,1\}://[^[:space:]]*!!g' ~/Desktop/texts_tidying/*.txt
+LC_ALL=C sed -i -e 's!http\(s\)\{0,1\}://[^[:space:]]*!!g' ~/Desktop/texts_tidying/*.txt
 
 # Use this line to put one space after periods
-sed -i -e -E "s/\\.(\S)/\\. \1/g" ~/Desktop/texts_tidying/*.txt
+LC_ALL=C sed -i -e -E "s/\\.(\S)/\\. \1/g" ~/Desktop/texts_tidying/*.txt
+
+# Use this line to delete hashtags
+# Caution: This also removes numeric values after #, so need to eventually tweak
+# LC_ALL=C sed -i -e 's/#[^ ]*//g' ~/Desktop/texts_tidying/*.txt
 
 # This code removes duplicate text while retaining the first iteration
 # This only works for exact matches on their own lines
@@ -17,7 +21,6 @@ done
 for i in ~/Desktop/texts_tidying/*.out; do
    mv -- "$i" "${i%.out}"
 done
-
 
 # This code removes *all* white spaces in a file
 # Probably don't need to use this
